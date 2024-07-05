@@ -7,13 +7,13 @@ import { cn } from './lib/utils';
 import { CategoryType } from '@/types';
 
 interface MainNavProps {
-  data: CategoryType[];
+  data: CategoryType[] | null;
 }
 
 const MainNav: React.FC<MainNavProps> = ({ data }) => {
   const pathName = usePathname();
 
-  const routes = data.map((route) => ({
+  const routes = data?.map((route) => ({
     href: `/category/${route.id}`,
     label: route.name,
     active: pathName === `/category/${route.id}`,
@@ -21,7 +21,7 @@ const MainNav: React.FC<MainNavProps> = ({ data }) => {
 
   return (
     <nav className="mx-6 items-center flex space-x-4 lg:space-x-6">
-      {routes.map((route) => (
+      {routes?.map((route) => (
         <Link
           key={route.href}
           href={route.href}
